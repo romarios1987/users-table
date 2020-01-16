@@ -1,0 +1,499 @@
+/*Fonts*/
+/* @font-face {
+  font-family: 'Byom Icons';
+  src: url('../Fonts/Byom-Icons-Trial.ttf');
+} */
+
+/* Variables */
+:root {
+  font-size: 17px;
+  --blue: #282c34;
+  --semi-white: #eee;
+  --semi-black: #333;
+  --content-size: 80vw;
+  --danger-red: rgb(221, 87, 87);
+  --ok-green: #5caa5c;
+  --hover-save: #5c975c;
+  --modal-cont-bg: rgba(0, 0, 0, 0.25);
+  --modal-bg: white;
+  --modal-divide-line: rgba(0, 0, 0, 0.3);
+  --table-header: #a8a8a8;
+  --table-background: #595959;
+}
+
+/* Generic Changes */
+* {
+  margin: 0;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+body {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+input {
+  cursor: text;
+}
+
+input:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+table {
+  width: var(--content-size);
+  table-layout: fixed;
+  margin: auto;
+  margin-top: 10px;
+  background-color: var(--table-background);
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+thead th {
+  width: 25%;
+  padding: 8px;
+  background-color: var(--table-header);
+}
+
+thead th:last-child {
+  width: 12%;
+}
+
+tbody td {
+  text-align: center;
+  padding: 5px;
+  word-wrap: break-word;
+  vertical-align: center;
+}
+
+tbody td:last-child > * {
+  font-size: 15px;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+tbody tr {
+  background-color: #f5f5f5;
+}
+
+tbody td:not([colspan]):last-child {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.blue {
+  color: var(--blue);
+}
+
+.left-arrow {
+  transform: rotate(180deg);
+}
+
+.input-block {
+  display: block;
+  margin: 10px 0px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgba(50, 50, 50, 0.4);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn-add {
+  color: white;
+  background-color: var(--blue);
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.btn-add::before {
+  content: '+';
+  font-weight: bolder;
+  margin-right: 4px;
+}
+
+.btn-delete {
+  font-weight: bolder;
+  background-color: var(--danger-red);
+}
+
+.btn-edit {
+  background: var(--blue);
+  margin-right: 1px;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.div-actions {
+  width: 80vw;
+  display: flex;
+  padding: 0px 4px;
+  padding-bottom: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.div-actions input {
+  width: 20%;
+  padding: 5px 8px;
+  border: 1px solid rgba(30, 30, 30, 0.4);
+  border-radius: 4px;
+}
+
+.alert {
+  position: fixed;
+  top: 0px;
+  right: 20px;
+  max-width: 25vw;
+  font-size: 1.1rem;
+  margin: auto;
+  margin-top: 23px;
+  margin-bottom: -8px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+  animation: show 3s ease-out;
+  animation-fill-mode: backwards;
+}
+
+.alert-danger {
+  background-color: var(--danger-red);
+}
+
+.alert-success {
+  background-color: var(--ok-green);
+}
+
+tr.no-users td {
+  display: '';
+  height: 50px;
+  font-weight: bold;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.trash::before {
+  content: 'X';
+  font-weight: bold;
+}
+
+.pencil::after {
+  content: 'E';
+  font-weight: bold;
+}
+
+.pagination-container {
+  width: 80vw;
+  margin: auto;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bolder;
+  background-color: white;
+  padding: 0px 8px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.paginationCurrentPage {
+  background: var(--blue);
+  color: white;
+  font-weight: bold;
+  padding: 3px 10px;
+  margin: 0px 5px;
+  border: 2px solid var(--blue);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.paginationPageNumber {
+  font-weight: bold;
+  padding: 3px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+/* Modal Style */
+.modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--modal-cont-bg);
+  transition: all 0.5s;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  animation: fade-in 0.5s;
+}
+
+.modal {
+  background-color: var(--modal-bg);
+  padding: 26px;
+  border-radius: 2px;
+  width: 55vw;
+  box-sizing: border-box;
+  border: 5px solid var(--blue);
+  box-shadow: 0px 0px 0px 5px white, 0px 0px 7px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  animation: drop-down 0.5s;
+  transition: all 0.3s ease-out;
+}
+
+.modal-header {
+  padding: 4px 8px;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.modal-form {
+  padding: 4px 2px;
+  display: grid;
+  grid-template-areas: 'name surname' 'email email' 'actions actions';
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  justify-items: center;
+}
+
+.modal-form .name {
+  grid-area: name;
+}
+
+.modal-form .surname {
+  grid-area: surname;
+}
+
+.modal-form .email {
+  grid-area: email;
+}
+
+.modal-form label {
+  width: 100%;
+  font-size: 1.07rem;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.modal-form label input {
+  display: block;
+  width: 100%;
+  padding: 5px 8px;
+  margin: 4px 0px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  grid-area: actions;
+  width: 100%;
+  margin-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-actions button {
+  width: 48%;
+  font-size: 1rem;
+  padding: 8px 0px;
+  background: #a4a4a4;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.modal-actions button.save {
+  background-color: var(--ok-green);
+}
+
+.modal-actions button.save:hover {
+  background-color: var(--hover-save);
+}
+
+.modal-actions button.cancel:hover {
+  background-color: #888;
+}
+
+.fade-out {
+  animation: fade-out 500ms;
+}
+
+/* Specific changes */
+#main {
+  margin: 20px;
+}
+
+#main > h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--content-size);
+  font-size: 3rem;
+  font-weight: 100;
+  margin: auto;
+  padding-bottom: 25px;
+}
+
+#main > section {
+  margin-top: 30px;
+}
+
+#user-form {
+  width: var(--content-size);
+  margin: 20px auto;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes drop-down {
+  from {
+    transform: translateY(-30px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes show {
+  0%,
+  100% {
+    transform: translateX(120%);
+  }
+  20%,
+  80% {
+    transform: translateX(0px);
+  }
+}
+
+/* Change to mobile */
+@media (max-width: 765px) {
+  .div-actions input {
+    width: 40%;
+  }
+
+  table {
+    width: 85vw;
+  }
+
+  table th {
+    width: 20%;
+  }
+
+  table th:last-child {
+    width: 22%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  :root {
+    font-size: 14px;
+  }
+
+  #main > h1 {
+    font-size: 2.4rem;
+  }
+
+  .modal {
+    width: 90vw;
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-form label {
+    width: 100%;
+  }
+
+  .modal-form label input {
+    width: 95%;
+  }
+
+  tbody td:last-child {
+    padding: 3px;
+    flex-wrap: wrap;
+  }
+
+  tbody td:last-child span {
+    margin: 2px 0px;
+  }
+
+  .alert {
+    max-width: 50vw;
+  }
+
+  .div-actions input {
+    width: 55%;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  .div-actions {
+    width: 86vw;
+  }
+}
